@@ -3,8 +3,8 @@ class RemoveAiWatermarks < Formula
 
   desc "Remove visible and invisible AI watermarks from images"
   homepage "https://github.com/wiltodelta/remove-ai-watermarks"
-  url "https://files.pythonhosted.org/packages/90/47/5fb2d03e222bcc3945f4ade280a3d384c1a7f7573146624ce3b2fc2c54b3/remove_ai_watermarks-0.34.1.tar.gz"
-  sha256 "b840f5d38cccc3473c6ecbaf607bca826f2da26bd797048f62b74b61e304336f"
+  url "https://files.pythonhosted.org/packages/98/3d/846e75ffb476160fc3f270e5ee8cd7a52c7aab26f471185d81ed57a8e86d/remove_ai_watermarks-0.35.0.tar.gz"
+  sha256 "ec52a56a18aab3e69cf0c0573750c47e0dd0dc70889591c3ba0de7239bcbba59"
   license "Apache-2.0"
 
   depends_on "python@3.12"
