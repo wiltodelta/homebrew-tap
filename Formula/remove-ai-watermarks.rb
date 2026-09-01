@@ -41,7 +41,7 @@ class RemoveAiWatermarks < Formula
     PYTHON
     system bin/"remove-ai-watermarks", "erase", testpath/"sample.png",
            "--region", "8,8,32,32", "-o", testpath/"erased.png"
-    assert_predicate testpath/"erased.png", :exist?
+    assert_path_exists testpath/"erased.png"
     assert_match "Verdict", shell_output("#{bin}/remove-ai-watermarks identify #{testpath}/sample.png")
   end
 end
