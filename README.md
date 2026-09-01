@@ -12,15 +12,21 @@ brew install wiltodelta/tap/remove-ai-watermarks
 remove-ai-watermarks --help
 ```
 
-The formula installs the core command surface: `identify`, `metadata`,
-`visible`, and `erase` (cv2 backend). The diffusion-based `invisible` / `all`
-pipeline needs heavy ML dependencies (torch, diffusers, multi-GB), which are
-kept out of the Homebrew install. Add them via the pip `gpu` extra into the
-same Python environment if you need them:
+The formula installs the CPU command surface: `identify`, `metadata`,
+`visible`, and `erase` (cv2 backend). It requests the package's `visible` extra,
+which is what brings in numpy and the binary opencv-python-headless wheel.
+
+The diffusion-based `invisible` / `all` pipeline needs heavy ML dependencies
+(torch, diffusers, multi-GB) **and an NVIDIA GPU** — every profile is CUDA-only,
+with no CPU or MPS fallback — so it is kept out of the Homebrew install. Add it
+with pip in your own Python environment when you need it:
 
 ```sh
-pip install "remove-ai-watermarks[gpu]"
+pip install "remove-ai-watermarks[qwen-zimage]"
 ```
+
+`qwen-zimage` is the extra that actually makes those commands run. The older
+`gpu` alias no longer exists.
 
 ## Install any formula from this tap
 
