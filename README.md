@@ -28,6 +28,18 @@ pip install "remove-ai-watermarks[qwen-zimage]"
 `qwen-zimage` is the extra that actually makes those commands run. The older
 `gpu` alias no longer exists.
 
+## translate-like-me
+
+A menu-bar app that translates the selected text in any app with a global
+hotkey, in your own writing style, through Claude, ChatGPT or Grok.
+Apple silicon, macOS 15 or later. [Source repo](https://github.com/wiltodelta/translate-like-me).
+
+```sh
+brew install --cask wiltodelta/tap/translate-like-me
+```
+
+The app updates itself with Sparkle, so `brew upgrade` leaves it alone.
+
 ## Install any formula from this tap
 
 `brew install wiltodelta/tap/<formula>`
