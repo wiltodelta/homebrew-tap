@@ -38,3 +38,8 @@ Or tap first, then install:
 brew tap wiltodelta/tap
 brew install <formula>
 ```
+
+## License
+
+Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for the
+full text.
