@@ -1,6 +1,6 @@
 cask "translate-like-me" do
-  version "3.0"
-  sha256 "49e8532688ca1bedfe77fe5c61f6d4518c57dbd024e196cca84527aa04a72fc5"
+  version "3.1"
+  sha256 "e202cba59f3ddd1b33546079fa2ade26c6dc7c65dbe96235522c8aadeb828264"
 
   url "https://github.com/wiltodelta/translate-like-me/releases/download/v#{version}/Translate-Like-Me-v#{version}-macOS.zip"
   name "Translate Like Me"
