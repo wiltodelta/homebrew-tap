@@ -43,6 +43,11 @@ jobs:
       - run: brew test-bot --only-formulae
         if: github.event_name == 'pull_request'
 
+      - name: Install the Python test runtime
+        run: |
+          brew install python@3.12
+          echo "$(brew --prefix python@3.12)/libexec/bin" >> "$GITHUB_PATH"
+
       - name: Check formula option selection and release synchronization
         run: |
           python3 -m unittest discover -s tests -p 'test_*.py'
