@@ -1,3 +1,6 @@
+# typed: strict
+# frozen_string_literal: true
+
 require "formula"
 require "formulary"
 require "tmpdir"
@@ -11,11 +14,12 @@ load_formula = lambda do |flags|
 end
 
 defaults = load_formula.call([])
-raise "Default install lost visible support" unless defaults.selected_extras == ["visible"]
+raise "Default install lost visible support" if defaults.selected_extras != ["visible"]
 raise "Wheel dylib IDs would be expanded by Homebrew" unless defaults.preserve_rpath?
+
 extras = defaults.class::PACKAGE_EXTRAS
 expected_flags = ["--without-default-extras", *extras.map { |extra| "--with-#{extra}" }].sort
-raise "An extra has no Homebrew option" unless defaults.options.as_flags.sort == expected_flags
+raise "An extra has no Homebrew option" if defaults.options.as_flags.sort != expected_flags
 
 cases = [
   ["default", [], ["visible"]],
@@ -51,10 +55,10 @@ cases.each do |name, flags, expected|
     target = (root/"source").to_s
     target += "[#{expected.join(",")}]" unless expected.empty?
     expected_call = [
-      "python3.12", "-m", "pip", "--python=#{root}/venv/bin/python", "install", target,
+      "python3.12", "-m", "pip", "--python=#{root}/venv/bin/python", "install", target
     ]
-    raise "#{name}: incorrect installed extras: #{calls.inspect}" unless calls == [expected_call]
-    unless virtualenv_calls == [[[root/"venv", "python3.12"], { system_site_packages: false }]]
+    raise "#{name}: incorrect installed extras: #{calls.inspect}" if calls != [expected_call]
+    if virtualenv_calls != [[[root/"venv", "python3.12"], { system_site_packages: false }]]
       raise "#{name}: dependency environment is not isolated"
     end
     raise "#{name}: command was not linked" unless (root/"bin/remove-ai-watermarks").symlink?

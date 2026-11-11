@@ -1,3 +1,6 @@
+# typed: strict
+# frozen_string_literal: true
+
 require "formula"
 require "formulary"
 require "tmpdir"
@@ -17,8 +20,9 @@ Dir.mktmpdir("raiw-wheel-linkage-") do |directory|
   source.write("int sample(void) { return 42; }\n")
   raise "Could not compile fixture" unless system(
     "/usr/bin/clang", "-dynamiclib", "-Wl,-install_name,/DLC/av/.dylibs/libsample.dylib",
-    "-o", library, source,
+    "-o", library, source
   )
+
   # A wheel may expose aliases; changing an external symlink target is forbidden.
   (library.dirname/"alias.dylib").make_symlink(library)
   calls = []
@@ -29,10 +33,11 @@ Dir.mktmpdir("raiw-wheel-linkage-") do |directory|
   end
   formula.preserve_wheel_linkage
   expected = "@rpath/libsample.dylib"
-  raise "Hidden wheel dylib ID was not normalized" unless MachOPathname.wrap(library).dylib_id == expected
-  raise "Changed wheel was not signed once" unless calls.length == 1
+  raise "Hidden wheel dylib ID was not normalized" if MachOPathname.wrap(library).dylib_id != expected
+  raise "Changed wheel was not signed once" if calls.length != 1
   raise "Signature is invalid" unless system("/usr/bin/codesign", "--verify", library)
+
   formula.preserve_wheel_linkage
-  raise "An unchanged wheel was signed again" unless calls.length == 1
+  raise "An unchanged wheel was signed again" if calls.length != 1
 end
 puts "Hidden wheel dylib ID and signature passed"
