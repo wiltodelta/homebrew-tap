@@ -43,6 +43,37 @@ jobs:
       - run: brew test-bot --only-formulae
         if: github.event_name == 'pull_request'
 
+      - name: Check formula option selection and release synchronization
+        run: |
+          python3 -m unittest discover -s tests -p 'test_*.py'
+          brew ruby tests/formula_options.rb
+          brew ruby tests/wheel_linkage.rb
+          python3 scripts/sync_remove_ai_watermarks.py --check
+
+      - name: Install and test the default image profile
+        run: |
+          brew install --build-from-source wiltodelta/tap/remove-ai-watermarks
+          brew test wiltodelta/tap/remove-ai-watermarks
+
+      - name: Install and test the base-only profile
+        run: |
+          brew reinstall --build-from-source wiltodelta/tap/remove-ai-watermarks --without-default-extras
+          brew test wiltodelta/tap/remove-ai-watermarks
+
+      - name: Install and test the video profile
+        if: matrix.os == 'macos-15-intel'
+        run: |
+          brew reinstall --build-from-source wiltodelta/tap/remove-ai-watermarks --with-video
+          brew test wiltodelta/tap/remove-ai-watermarks
+
+      - name: Install and test the Seedance dependency profile
+        if: matrix.os != 'macos-15-intel'
+        env:
+          PIP_EXTRA_INDEX_URL: https://download.pytorch.org/whl/cpu
+        run: |
+          brew reinstall --build-from-source wiltodelta/tap/remove-ai-watermarks --with-video --with-diffusion
+          brew test wiltodelta/tap/remove-ai-watermarks
+
       - name: Upload bottles as artifact
         if: always() && github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4

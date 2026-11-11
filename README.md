@@ -12,21 +12,51 @@ brew install wiltodelta/tap/remove-ai-watermarks
 remove-ai-watermarks --help
 ```
 
-The formula installs the CPU command surface: `identify`, `metadata`,
-`visible`, and `erase` (cv2 backend). It requests the package's `visible` extra,
-which is what brings in numpy and the binary opencv-python-headless wheel.
-
-The diffusion-based `invisible` / `all` pipeline needs heavy ML dependencies
-(torch, diffusers, multi-GB) **and an NVIDIA GPU** — every profile is CUDA-only,
-with no CPU or MPS fallback — so it is kept out of the Homebrew install. Add it
-with pip in your own Python environment when you need it:
+The default installation includes the package's `visible` extra for image detection
+and visible-mark removal. Every published package extra has a matching
+`--with-<extra>` flag. Combine flags to install the features you need:
 
 ```sh
-pip install "remove-ai-watermarks[qwen-zimage]"
+# Experimental Seedance video processing, including FFmpeg and ffprobe.
+brew install wiltodelta/tap/remove-ai-watermarks --with-video --with-diffusion
+
+# All runtime extras.
+brew install wiltodelta/tap/remove-ai-watermarks --with-all
+
+# Base package only, or a minimal custom selection.
+brew install wiltodelta/tap/remove-ai-watermarks --without-default-extras
+brew install wiltodelta/tap/remove-ai-watermarks --without-default-extras --with-heif
+
+# List the options for the pinned package release.
+brew options wiltodelta/tap/remove-ai-watermarks
 ```
 
-`qwen-zimage` is the extra that actually makes those commands run. The older
-`gpu` alias no longer exists.
+Use `brew reinstall` with the same flags to add extras to an existing installation.
+Homebrew retains selected flags on reinstall and upgrade. To remove previously
+selected extras, uninstall the formula and install it again with the desired flags.
+`--with-visible` explicitly enables image support when the base-only flag is retained.
+
+Dependencies are resolved inside an isolated Homebrew Python environment.
+The `video` extra includes an offline FFmpeg/ffprobe bundle. Model weights download
+on first use. Extras retain the package's platform and hardware requirements:
+image regeneration needs NVIDIA CUDA; video VAE profiles support CPU, MPS, or CUDA
+when the selected Torch stack supports the host platform. Selecting `--with-all`
+does not make unsupported hardware compatible.
+
+See the library's [installation guide](https://github.com/wiltodelta/remove-ai-watermarks/blob/main/docs/installation.md)
+for the purpose of each extra and the platform requirements.
+
+### Formula maintenance
+
+```sh
+bash maintain.sh
+python3 scripts/sync_remove_ai_watermarks.py --version VERSION
+```
+
+The sync script validates the version-specific PyPI source archive and checksum,
+then updates the complete `Provides-Extra` option inventory. The library's
+release workflow runs it automatically. A new source version resets the formula
+revision; syncing the same artifact preserves the revision.
 
 ## translate-like-me
 
