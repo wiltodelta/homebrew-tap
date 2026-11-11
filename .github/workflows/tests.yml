@@ -49,6 +49,7 @@ jobs:
           echo "$(brew --prefix python@3.12)/libexec/bin" >> "$GITHUB_PATH"
 
       - name: Check formula option selection and release synchronization
+        working-directory: ${{ steps.set-up-homebrew.outputs.repository-path }}
         run: |
           python3 -m unittest discover -s tests -p 'test_*.py'
           brew ruby tests/formula_options.rb
