@@ -4,8 +4,8 @@ Homebrew formulae by [@wiltodelta](https://github.com/wiltodelta).
 
 ## remove-ai-watermarks
 
-Remove visible and invisible AI watermarks from images (Gemini / Nano Banana,
-ChatGPT, Stable Diffusion). [Source repo](https://github.com/wiltodelta/remove-ai-watermarks).
+Clean AI watermarks and provenance in images, video, and text you generated or
+edited. [Source repo](https://github.com/wiltodelta/remove-ai-watermarks).
 
 ```sh
 brew install wiltodelta/tap/remove-ai-watermarks
@@ -20,8 +20,11 @@ and visible-mark removal. Every published package extra has a matching
 # Experimental Seedance video processing, including FFmpeg and ffprobe.
 brew install wiltodelta/tap/remove-ai-watermarks --with-video --with-diffusion
 
-# All runtime extras.
+# The package's all group.
 brew install wiltodelta/tap/remove-ai-watermarks --with-all
+
+# Complete public backends, including OCR proposals and ONNX classification.
+brew install wiltodelta/tap/remove-ai-watermarks --with-all --with-text-draft --with-classify-onnx
 
 # Base package only, or a minimal custom selection.
 brew install wiltodelta/tap/remove-ai-watermarks --without-default-extras
