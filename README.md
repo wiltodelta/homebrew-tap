@@ -37,6 +37,10 @@ selected extras, uninstall the formula and install it again with the desired fla
 `--with-visible` explicitly enables image support when the base-only flag is retained.
 
 Dependencies are resolved inside an isolated Homebrew Python environment.
+Intel Macs automatically receive temporary Rust build tools from the official
+Rust distribution, with a verified checksum, to compile current cryptography
+dependencies. The compiler stays in the build directory. OpenSSL and pkgconf
+are installed through Homebrew; no manual compiler setup is needed.
 The `video` extra includes an offline FFmpeg/ffprobe bundle. Model weights download
 on first use. Extras retain the package's platform and hardware requirements:
 image regeneration needs NVIDIA CUDA; video VAE profiles support CPU, MPS, or CUDA

@@ -12,6 +12,21 @@ class RemoveAiWatermarks < Formula
 
   depends_on "python@3.12"
 
+  on_macos do
+    on_intel do
+      depends_on "pkgconf" => :build
+      depends_on "openssl@3"
+
+      # Secure cryptography releases require a source build on Intel Macs.
+      # Bootstrap the compiler from Rust's official release distribution instead
+      # of building Homebrew's full Rust/LLVM toolchain from source.
+      resource "rust-build-toolchain" do
+        url "https://static.rust-lang.org/dist/rust-1.99.1-x86_64-apple-darwin.tar.xz"
+        sha256 "13b237d0294bad3bb7b18d559517947ed8348ea25812fa3b468c904996f80e34"
+      end
+    end
+  end
+
   preserve_rpath
 
   # BEGIN PACKAGE EXTRAS
@@ -46,6 +61,7 @@ class RemoveAiWatermarks < Formula
   end
 
   def install
+    prepare_intel_build_tools
     virtualenv_create(libexec, "python3.12", system_site_packages: false)
     extras = selected_extras
     target = extras.empty? ? buildpath.to_s : "#{buildpath}[#{extras.join(",")}]"
@@ -54,6 +70,19 @@ class RemoveAiWatermarks < Formula
     system "python3.12", "-m", "pip", "--python=#{libexec}/bin/python", "install", target
     preserve_wheel_linkage
     bin.install_symlink libexec/"bin/remove-ai-watermarks"
+  end
+
+  def prepare_intel_build_tools
+    return unless OS.mac?
+    return unless Hardware::CPU.intel?
+
+    toolchain = buildpath/"rust-build-toolchain"
+    resource("rust-build-toolchain").stage do
+      system "./install.sh", "--prefix=#{toolchain}",
+             "--components=rustc,cargo,rust-std-x86_64-apple-darwin", "--disable-ldconfig"
+    end
+    ENV.prepend_path "PATH", toolchain/"bin"
+    ENV["OPENSSL_DIR"] = formula_opt_prefix("openssl@3")
   end
 
   def preserve_wheel_linkage

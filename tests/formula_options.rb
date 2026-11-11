@@ -44,6 +44,7 @@ cases.each do |name, flags, expected|
     formula.define_singleton_method(:buildpath) { root/"source" }
     formula.define_singleton_method(:libexec) { root/"venv" }
     formula.define_singleton_method(:bin) { root/"bin" }
+    formula.define_singleton_method(:prepare_intel_build_tools) { true }
     formula.define_singleton_method(:virtualenv_create) do |*args, **kwargs|
       virtualenv_calls << [args, kwargs]
     end
