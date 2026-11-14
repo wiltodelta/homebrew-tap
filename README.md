@@ -23,8 +23,8 @@ brew install wiltodelta/tap/remove-ai-watermarks --with-video --with-diffusion
 # The package's all group.
 brew install wiltodelta/tap/remove-ai-watermarks --with-all
 
-# Complete public backends, including OCR proposals and ONNX classification.
-brew install wiltodelta/tap/remove-ai-watermarks --with-all --with-text-draft --with-classify-onnx
+# Complete public backends, including OCR proposals.
+brew install wiltodelta/tap/remove-ai-watermarks --with-all --with-text-draft
 
 # Base package only, or a minimal custom selection.
 brew install wiltodelta/tap/remove-ai-watermarks --without-default-extras
