@@ -3,8 +3,8 @@ class RemoveAiWatermarks < Formula
 
   desc "Clean AI watermarks and provenance in images, video, and text"
   homepage "https://github.com/wiltodelta/remove-ai-watermarks"
-  url "https://files.pythonhosted.org/packages/ce/03/a0b9bc8294c8e99b47c8d9b7cd0a2ee2c3c6023f02b7fb00673f72f139d5/remove_ai_watermarks-0.61.0.tar.gz"
-  sha256 "a0b8fd1389c0c1eacbc2534f63d87c5436b22ee09fb2217714c21f16032c930a"
+  url "https://files.pythonhosted.org/packages/e5/fc/f4ae206f72bb5bed6c224a1840150303f8eefcc52318510f0e353c4a4eff/remove_ai_watermarks-0.62.0.tar.gz"
+  sha256 "7b802283c561317df3846e8db6f148b9ea400d85d50eb4f167ba3f4508c1aa94"
   license "Apache-2.0"
 
   option "without-default-extras", "Skip the default visible image support"
@@ -31,8 +31,6 @@ class RemoveAiWatermarks < Formula
   # BEGIN PACKAGE EXTRAS
   PACKAGE_EXTRAS = %w[
     all
-    classify
-    classify-onnx
     detect
     dev
     diffusion
