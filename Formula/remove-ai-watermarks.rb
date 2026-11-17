@@ -3,8 +3,8 @@ class RemoveAiWatermarks < Formula
 
   desc "Clean AI watermarks and provenance in images, video, and text"
   homepage "https://github.com/wiltodelta/remove-ai-watermarks"
-  url "https://files.pythonhosted.org/packages/8c/4a/7ee3a0fd05283571d10c29b60fd4cef249294764beeec388dc7406430494/remove_ai_watermarks-0.62.1.tar.gz"
-  sha256 "fc457a02778fe4f1dae9549fe1a339d8c9ad1de97da2b6ca513134bd39c488b6"
+  url "https://files.pythonhosted.org/packages/a0/8a/da3f3235c48dae6e60cd78343e7f0a17181f49b08fe75a822d8193c604d2/remove_ai_watermarks-0.63.0.tar.gz"
+  sha256 "dd077d5a85f6043a42b6af6557658f0f817a88c5839d4781d2804dc97ec4ad10"
   license "Apache-2.0"
 
   option "without-default-extras", "Skip the default visible image support"
@@ -31,6 +31,13 @@ class RemoveAiWatermarks < Formula
   # BEGIN PACKAGE EXTRAS
   PACKAGE_EXTRAS = %w[
     all
+    audio
+    audio-codec
+    audio-detect
+    audio-perth
+    audio-silentcipher
+    audio-vocoder
+    audio-wavmark
     detect
     dev
     diffusion
@@ -40,10 +47,13 @@ class RemoveAiWatermarks < Formula
     pixels
     qwen-zimage
     source-classify
+    text
     text-draft
+    text-mlx
     text-restoration
     trustmark
     video
+    video-detect
     visible
   ].freeze
   # END PACKAGE EXTRAS
