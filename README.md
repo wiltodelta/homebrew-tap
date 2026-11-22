@@ -65,6 +65,18 @@ then updates the complete `Provides-Extra` option inventory. The library's
 release workflow runs it automatically. A new source version resets the formula
 revision; syncing the same artifact preserves the revision.
 
+## rota
+
+A menu-bar app that schedules agent routines on Claude Code, Codex, Grok Build,
+Antigravity, or a shell, then shows the results and continues the conversation.
+Apple silicon, macOS 15 or later. [Source repo](https://github.com/wiltodelta/rota).
+
+```sh
+brew install --cask wiltodelta/tap/rota
+```
+
+The app updates itself with Sparkle, so `brew upgrade` leaves it alone.
+
 ## translate-like-me
 
 A menu-bar app that translates the selected text in any app with a global
