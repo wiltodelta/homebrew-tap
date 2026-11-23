@@ -3,8 +3,8 @@ class RemoveAiWatermarks < Formula
 
   desc "Clean AI watermarks and provenance in images, video, and text"
   homepage "https://github.com/wiltodelta/remove-ai-watermarks"
-  url "https://files.pythonhosted.org/packages/86/8f/5325ceb8fde7f516886ef5887e0ec0e7a02fb9a3d6cb8d9f37e13cb45eb4/remove_ai_watermarks-0.72.0.tar.gz"
-  sha256 "9ae8249ea44dc74258bed44045f4ff23ca7a237c535d18d190515b778a4ce75c"
+  url "https://files.pythonhosted.org/packages/96/8a/899eec277a4f1ef547ed9cf97311e226884e711c0d15055ea941b9a26115/remove_ai_watermarks-0.73.0.tar.gz"
+  sha256 "2cd60bafdab9c2c8b52d66aeb6028cf06b999fe939f7e2a1234f6cf9750ef7d7"
   license "Apache-2.0"
 
   option "without-default-extras", "Skip the default visible image support"
@@ -36,7 +36,6 @@ class RemoveAiWatermarks < Formula
     audio-detect
     audio-perth
     audio-silentcipher
-    audio-vocoder
     audio-wavmark
     detect
     dev
