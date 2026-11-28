@@ -1,6 +1,6 @@
 cask "rota" do
-  version "0.2.44"
-  sha256 "2bb5d5fef7e4b9d2acc31077c6abac619aec26031557f63159799ae73965b11d"
+  version "0.2.45"
+  sha256 "6fc7b79d5a6bd180b4c046ab023bf7ec025a5066733348cdb8d4e03e0d422775"
 
   url "https://github.com/wiltodelta/rota/releases/download/v#{version}/Rota-v#{version}-macOS.zip"
   name "Rota"
